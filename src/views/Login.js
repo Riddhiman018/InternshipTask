@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import qs from 'qs'
 import { API_URL_LOGIN } from "../config/config";
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -10,17 +11,26 @@ const Login = () => {
   const userLogin = async (e) => {
     e.preventDefault();
     const formdata = new FormData();
-    formdata.append("username", credentials.email);
-    formdata.append("password", credentials.password);
+    // formdata.append("username", credentials.email);
+    // formdata.append("password", credentials.password);
     console.log(formdata);
-    const config = {
-      headers: {
-        "content-type": "application/x-www-form-urlencoded",
-      },
+    const data1 = {
+      'username':credentials.email,
+      'password':credentials.password
+    }
+    // const config = {
+    //   headers: {
+    //     "content-type": "application/x-www-form-urlencoded",
+    //   },
+    // };
+    const options = {
+      method: 'POST',
+      data: data1,
+      url:'http://localhost:4000/login',
     };
+    console.log(qs.stringify(data1))
     try {
-      const res = await axios
-        .post(API_URL_LOGIN, formdata, config)
+      const res = await axios(options)
         .then((res) => {
           console.log(res);
           if (res.data.success === true) {
