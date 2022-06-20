@@ -1,12 +1,22 @@
 import React from "react";
 import AddContent from "./components/AddContent";
 import Header from "./components/Header";
+import axios from "axios";
 
 const Dashboard = () => {
   const a = [1, 2, 3, 4, 5, 6, 55];
+  //call /success get request here and get the user credentials then set authUser in localstorage
+  //AddContent Modal to have proper keypress effects
+  //AddPlaylist Functionality to be added (The Backend for this has already been made)
+  //The Socket Functionality also needs to be added to add the mobile device
+  //Have made changes to the login and Page so that routing is complete
+  //Lobby must have socket calls to start the playlist for testing it
+  //Stop PLaylist endpoint also must be configured
+  axios.get('http://localhost:4000/success').then(res=>console.log(res))
+  console.log(localStorage.getItem("authUser"))
   return (
     <div>
-      <AddContent />
+      {/* <AddContent /> */}
       <Header />
       <div className="h-screen flex">
         <main

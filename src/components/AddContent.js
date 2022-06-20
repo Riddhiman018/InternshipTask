@@ -10,7 +10,7 @@ const AddContent = () => {
     formData.set("postedvideos", image);
 
     axios
-      .post(`http://localhost:2000/addVideos`, formData, {
+      .post(`http://localhost:4000/addVideos`, formData, {
         headers: {
           "content-type": "multipart/form-data",
         },

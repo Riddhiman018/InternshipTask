@@ -15,6 +15,15 @@ function App() {
           <Route path="/login" exact>
             <Login />
           </Route>
+          <Route path="/dashboard" exact>
+            <Dashboard />
+          </Route>
+          <Route path="/playlist" exact>
+            <Playlist />
+          </Route>
+          <Route path="/lobby" exact>
+            <Lobby />
+          </Route>
         </Switch>
       </BrowserRouter>
       <ToastContainer></ToastContainer>

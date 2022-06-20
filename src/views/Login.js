@@ -35,6 +35,7 @@ const Login = () => {
           console.log(res);
           if (res.data.success === true) {
             localStorage.setItem("authUser", JSON.stringify(res.data));
+            console.log(localStorage.getItem("authUser"))
             console.log("Auth token Saved");
           }
         });
@@ -136,8 +137,7 @@ const Login = () => {
                   src="https://i.imgur.com/arC60SB.png"
                   alt=""
                 />
-                Sign-in with google
-              </button>
+              <a href="http://localhost:4000/auth/google">Sign-in with google</a></button>
             </div>
             <span className="text-sm text-center m-auto w-full text-gray-400">
               Don't have an account?
