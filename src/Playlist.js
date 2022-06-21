@@ -1,35 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import AddContent from "./components/AddContent";
+import AddDisplay from "./components/AddDisplay";
 import Header from "./components/Header";
+import qs from "qs";
+import axios from "axios";
 
 const Playlist = () => {
   const a = [1, 2, 3, 4, 5, 6, 55];
-  const user = JSON.parse(localStorage.getItem("authUser"));
-  useEffect(() => {}, []);
-
-  // const userLogin = async () => {
-  //   e.preventDefault();
-  //   const options = {
-  //     method: "POST",
-  //     data: formData,
-  //     url: "http://localhost:4000/login",
-  //   };
-  //   console.log(qs.stringify(formData));
-  //   try {
-  //     const res = await axios(options).then((res) => {
-  //       console.log(res);
-  //       if (res.status === 200) {
-  //         localStorage.setItem("authUser", JSON.stringify(res.data));
-  //         window.location.replace("/Dashboard");
-  //       }
-  //     });
-  //   } catch (err) {
-  //     throw err.response;
-  //   }
-  // };
+  const user = localStorage.getItem("authUser");
+  const [open, setOpen] = useState(false);
   console.log(user.playlists);
   return (
     <div>
       <Header />
+      {open === true && <AddContent setOpen={setOpen} open={open} />}{" "}
       <div className="h-screen flex">
         <main
           className="flex-1 bg-gray-200 dark:bg-gray-900 overflow-y-auto transition
@@ -43,6 +27,7 @@ const Playlist = () => {
               <h2 className="text-4xl font-medium capitalize">My Playlist</h2>
 
               <button
+                onClick={() => setOpen(true)}
                 type="button"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-[#00A0FB] border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 hover:bg-blue-500"
               >
@@ -60,7 +45,7 @@ const Playlist = () => {
                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                   />
                 </svg>
-                Add Playlist
+                Add Video
               </button>
             </div>
 

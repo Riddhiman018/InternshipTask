@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import axios from "axios";
 import { toast } from "react-toastify";
-const AddContent = () => {
+const AddContent = ({ setOpen, open }) => {
   const [image, setimage] = useState([]);
   const saveProfile = () => {
     const formData = new FormData();
@@ -17,9 +17,11 @@ const AddContent = () => {
       })
       .then((res) => {
         console.log(res.data);
+        setOpen(false);
         toast.success("Image Changed !");
       })
       .catch((err) => {
+        setOpen(false);
         toast.error("Error in Updating Profile Image!");
       });
   };
@@ -36,6 +38,7 @@ const AddContent = () => {
             <div className="flex flex-row justify-between p-8 bg-black text-white border-b border-gray-200 ">
               <p className="font-semibold text-white">Add Content</p>
               <svg
+                onClick={() => setOpen(false)}
                 className="w-6 h-6"
                 fill="none"
                 stroke="currentColor"
@@ -66,17 +69,20 @@ const AddContent = () => {
                 <input
                   onChange={(e) => setimage(e.target.files[0])}
                   type="file"
-                  className="px-8 py-2 font-semibold border rounded w-fit m-auto border-[#F5CB57] text-[#F5CB57]"
+                  className="px-8 py-2  font-semibold border rounded w-full m-auto border-[#F5CB57] text-[#F5CB57]"
                 />
               </p>
             </div>
             <div className="flex flex-row items-center justify-start p-5 bg-white border-t border-gray-200 rounded-bl-lg rounded-br-lg">
-              <p className="px-8 py-2 font-semibold border mx-4 rounded border-black text-gray-600">
+              <p
+                onClick={() => setOpen(false)}
+                className="px-8 py-2 cursor-pointer font-semibold border mx-4 rounded border-black text-gray-600"
+              >
                 Cancel
               </p>
               <p
                 onClick={saveProfile}
-                className="px-8 py-2 font-semibold border mx-4 rounded bg-black border-black text-white"
+                className="px-8 py-2 cursor-pointer font-semibold border mx-4 rounded bg-black border-black text-white"
               >
                 Add
               </p>
