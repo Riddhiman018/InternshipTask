@@ -12,8 +12,7 @@ const Dashboard = () => {
   //Have made changes to the login and Page so that routing is complete
   //Lobby must have socket calls to start the playlist for testing it
   //Stop PLaylist endpoint also must be configured
-  axios.get('http://localhost:4000/success').then(res=>console.log(res))
-  console.log(localStorage.getItem("authUser"))
+  console.log(localStorage.getItem("authUser"));
   return (
     <div>
       {/* <AddContent /> */}

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import qs from 'qs'
+import qs from "qs";
 import { API_URL_LOGIN } from "../config/config";
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -11,38 +11,36 @@ const Login = () => {
   const userLogin = async (e) => {
     e.preventDefault();
     const formdata = new FormData();
-    // formdata.append("username", credentials.email);
-    // formdata.append("password", credentials.password);
     console.log(formdata);
-    const data1 = {
-      'username':credentials.email,
-      'password':credentials.password
-    }
-    // const config = {
-    //   headers: {
-    //     "content-type": "application/x-www-form-urlencoded",
-    //   },
-    // };
-    const options = {
-      method: 'POST',
-      data: data1,
-      url:'http://localhost:4000/login',
+    const formData = {
+      username: credentials.email,
+      password: credentials.password,
     };
-    console.log(qs.stringify(data1))
+    const options = {
+      method: "POST",
+      data: formData,
+      url: "http://localhost:4000/login",
+    };
+    console.log(qs.stringify(formData));
     try {
-      const res = await axios(options)
-        .then((res) => {
-          console.log(res);
-          if (res.data.success === true) {
-            localStorage.setItem("authUser", JSON.stringify(res.data));
-            console.log(localStorage.getItem("authUser"))
-            console.log("Auth token Saved");
-          }
-        });
+      const res = await axios(options).then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          localStorage.setItem("authUser", JSON.stringify(res.data));
+          window.location.replace("/Dashboard");
+        }
+      });
     } catch (err) {
       throw err.response;
     }
   };
+  useEffect(() => {
+    const user = localStorage.getItem("authUser");
+    if (user) {
+      window.location.replace("/Dashboard");
+    }
+  }, []);
+
   return (
     <div>
       <div className="h-screen flex flex-col md:flex-row">
@@ -137,7 +135,10 @@ const Login = () => {
                   src="https://i.imgur.com/arC60SB.png"
                   alt=""
                 />
-              <a href="http://localhost:4000/auth/google">Sign-in with google</a></button>
+                <a href="http://localhost:4000/auth/google">
+                  Sign-in with google
+                </a>
+              </button>
             </div>
             <span className="text-sm text-center m-auto w-full text-gray-400">
               Don't have an account?

@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 
 const Playlist = () => {
   const a = [1, 2, 3, 4, 5, 6, 55];
+  const user = JSON.parse(localStorage.getItem("authUser"));
+  useEffect(() => {}, []);
+
+  // const userLogin = async () => {
+  //   e.preventDefault();
+  //   const options = {
+  //     method: "POST",
+  //     data: formData,
+  //     url: "http://localhost:4000/login",
+  //   };
+  //   console.log(qs.stringify(formData));
+  //   try {
+  //     const res = await axios(options).then((res) => {
+  //       console.log(res);
+  //       if (res.status === 200) {
+  //         localStorage.setItem("authUser", JSON.stringify(res.data));
+  //         window.location.replace("/Dashboard");
+  //       }
+  //     });
+  //   } catch (err) {
+  //     throw err.response;
+  //   }
+  // };
+  console.log(user.playlists);
   return (
     <div>
       <Header />
@@ -45,7 +69,7 @@ const Playlist = () => {
 				ease-in-out"
             ></div>
             <div className="flex flex-col mt-2">
-              {a.map((item) => (
+              {user?.playlists?.map((item) => (
                 <div className="flex flex-row mt-2 relative">
                   <div
                     className="flex w-full items-center justify-between bg-white

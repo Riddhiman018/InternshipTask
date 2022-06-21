@@ -12,6 +12,7 @@ module.exports = {
     "./src/Playlist.js",
     "./src/Lobby.js",
     "./src/components/Header.js",
+    "./src/components/Menu.js",
   ],
   theme: {
     extend: {},
